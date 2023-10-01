@@ -22,13 +22,13 @@ jobs:
       
 
       - name: Generate CSV
-        run: python generate_csv.py
+        run: python person.py
 
       - name: Commit and push CSV file
         run: |
           git config --global user.email "imxasik@gmail.com"
           git config --global user.name "imxasik"
-          git add data/output.csv
+          git add data/person.csv
           git commit -m "Add generated CSV file"
           git push
           
