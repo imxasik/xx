@@ -29,10 +29,12 @@ jobs:
       run: mv person.csv $GITHUB_WORKSPACE/output/
 
     - name: Commit and push changes
-      run: |
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    run: |
         git config --global user.name 'imxasik'
         git config --global user.email 'imxasik@gmail.com'
         git add .
         git commit -m "Update person.csv"
-        git push
+        git push https://$GH_TOKEN@github.com/imxasik/xx.git
         
