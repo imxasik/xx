@@ -2,30 +2,28 @@ name: Generate Person Data
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'person.py'
 
 jobs:
-  generate:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.8"  # Use the desired Python version
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'  # Use the desired Python version
 
-      - name: Run person.py
-        run: python person.py
+    - name: Run Python Script
+      run: python person.py
 
-      - name: Commit and push changes
-        run: |
-          git config --global user.email "github-actions@users.noreply.github.com"
-          git config --global user.name "GitHub Actions"
-          git add person.csv
-          git commit -m "Generate person.csv"
-          git push
-          
+    - name: Upload CSV
+      uses: actions/upload-artifact@v2
+      with:
+        name: person-data
+        path: person.csv
+      
