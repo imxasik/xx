@@ -23,7 +23,7 @@ jobs:
       run: python person.py
 
     - name: Move person.csv to code tab
-      run: mv person.csv $GITHUB_WORKSPACE
+      run: mv person.csv $GITHUB_WORKSPACE/output/
 
     - name: Commit and push changes
       run: |
