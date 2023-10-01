@@ -1,4 +1,4 @@
-name: Generate Person CSV
+name: Generate Matplotlib Plot
 
 on:
   push:
@@ -6,34 +6,33 @@ on:
       - main
 
 jobs:
-  build:
+  generate-plot:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
 
-    - name: Run person.py
-      run: python person.py
+      - name: Install Dependencies
+        run: pip install matplotlib numpy
 
-    - name: Create output directory
-      run: mkdir $GITHUB_WORKSPACE/output
+      - name: Generate Plot
+        run: python plot.py
 
-    - name: Move person.csv to code tab
-      run: mv person.csv $GITHUB_WORKSPACE/output/
+      - name: Save Plot to Main Branch
+        run: mv plot.png $GITHUB_WORKSPACE
+        continue-on-error: true
 
-    - name: Commit and push changes
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: |
-        git config --global user.name 'imxasik'
-        git config --global user.email 'imxasik@gmail.com'
-        git add .
-        git commit -m "Update person.csv"
-        git push https://$GH_TOKEN@github.com/imxasik/xx.git
-        
+      - name: Commit and Push Updated Plot
+        run: |
+          git config --global user.name "imxasik"
+          git config --global user.email "imxasik@gmail.com"
+          git add plot.png
+          git commit -m "Update matplotlib plot"
+          git push
+
