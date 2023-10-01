@@ -34,5 +34,5 @@ jobs:
           git config --global user.email "imxasik@gmail.com"
           git add plot.png
           git commit -m "Update matplotlib plot"
-          git push
+          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
 
