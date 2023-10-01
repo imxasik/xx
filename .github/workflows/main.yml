@@ -19,7 +19,8 @@ jobs:
           python-version: "3.8"  # Use the desired Python version
 
       - name: Install dependencies
-        run: pip install -r requirements.txt  # Add any necessary dependencies
+        run: pip install csv
+        run: pip install random # Add any necessary dependencies
 
       - name: Run person.py
         run: python person.py
