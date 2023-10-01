@@ -22,6 +22,9 @@ jobs:
     - name: Run person.py
       run: python person.py
 
+    - name: Create output directory
+      run: mkdir $GITHUB_WORKSPACE/output
+
     - name: Move person.csv to code tab
       run: mv person.csv $GITHUB_WORKSPACE/output/
 
