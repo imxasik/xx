@@ -1,34 +1,25 @@
-name: Generate CSV
+name: Generate Person CSV
 
 on:
   push:
     branches:
-      - main  # Change this to your main branch name
+      - main
 
 jobs:
   generate-csv:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8  # Change this to your desired Python version
-
-      - name: Install dependencies
-      
-
-      - name: Generate CSV
-        run: python person.py
-
-      - name: Commit and push CSV file
+      - name: Run Python Script
         run: |
-          git config --global user.email "imxasik@gmail.com"
-          git config --global user.name "imxasik"
-          git add data/person.csv
-          git commit -m "Add generated CSV file"
-          git push
-          
+          python person.py
+          mv person.csv $GITHUB_WORKSPACE/person.csv
+
+      - name: Upload CSV
+        uses: actions/upload-artifact@v2
+        with:
+          name: person-csv
+          path: $GITHUB_WORKSPACE/person.csv
