@@ -6,20 +6,30 @@ on:
       - main
 
 jobs:
-  generate-csv:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Run Python Script
-        run: |
-          python person.py
-          mv person.csv $GITHUB_WORKSPACE/person.csv
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
 
-      - name: Upload CSV
-        uses: actions/upload-artifact@v2
-        with:
-          name: person-csv
-          path: $GITHUB_WORKSPACE/person.csv
+
+    - name: Run person.py
+      run: python person.py
+
+    - name: Move person.csv to code tab
+      run: mv person.csv $GITHUB_WORKSPACE
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'imxasik'
+        git config --global user.email 'imxasik@gmail.com'
+        git add .
+        git commit -m "Update person.csv"
+        git push
+        
