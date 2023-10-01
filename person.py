@@ -1,21 +1,18 @@
 import csv
-import random
 
-# Sample data generation (replace with your actual data generation logic)
-data = []
-for _ in range(3):
-    person = {
-        "Name": "John Doe",
-        "Age": random.randint(18, 65),
-        "City": "Example City",
-    }
-    data.append(person)
+# Your code to generate CSV data here
 
-# Save data to a CSV file
-with open("person.csv", mode="w", newline="") as csv_file:
-    fieldnames = ["Name", "Age", "City"]
-    writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-    writer.writeheader()
-    for person in data:
-        writer.writerow(person)
-      
+data = [
+    ["Name", "Age"],
+    ["Alice", 25],
+    ["Bob", 30],
+    # Add more data here
+]
+
+csv_file = "data/output.csv"
+
+with open(csv_file, mode="w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
+
+print("CSV file generated.")
