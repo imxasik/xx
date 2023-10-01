@@ -18,7 +18,6 @@ jobs:
       with:
         python-version: 3.x
 
-
     - name: Run person.py
       run: python person.py
 
@@ -29,9 +28,9 @@ jobs:
       run: mv person.csv $GITHUB_WORKSPACE/output/
 
     - name: Commit and push changes
-    env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
-    run: |
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
         git config --global user.name 'imxasik'
         git config --global user.email 'imxasik@gmail.com'
         git add .
