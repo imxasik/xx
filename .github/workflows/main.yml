@@ -19,10 +19,7 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install matplotlib
-          pip install cartopy
-          pip install metpy
           pip install numpy
-          pip install xarray
 
       - name: Run Plot Script
         run: python plot.py
