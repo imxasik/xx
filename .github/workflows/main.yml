@@ -1,9 +1,7 @@
-name: Generate Matplotlib Plot
+name: Instant Runs
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:  # This allows running the workflow manually from GitHub
 
 jobs:
   generate-plot:
@@ -19,20 +17,12 @@ jobs:
           python-version: 3.9
 
       - name: Install Dependencies
-        run: pip install matplotlib numpy
-
-      - name: Generate Plot
-        run: python plot.py
-
-      - name: Save Plot to Main Branch
-        run: mv plot.png $GITHUB_WORKSPACE
-        continue-on-error: true
-
-      - name: Commit and Push Updated Plot
         run: |
-          git config --global user.name "imxasik"
-          git config --global user.email "imxasik@gmail.com"
-          git add plot.png
-          git commit -m "Update matplotlib plot"
-          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+          pip install matplotlib
+          pip install cartopy
+          pip install metpy
+          pip install numpy
+          pip install xarray
 
+      - name: Run Plot Script
+        run: python plot.py
