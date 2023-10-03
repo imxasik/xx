@@ -17,7 +17,7 @@ param = 'vwnd'
 level = 250
 
 # Remote get dataset using OPeNDAP method via xarray
-ds = xr.open_dataset('https://psl.noaa.gov/thredds/catalog/Datasets/ncep/catalog.html?dataset=Datasets/ncep/{}.{}.nc'.format(param, start_time[:4]))
+ds = xr.open_dataset('http://psl.noaa.gov/thredds/dodsC/Datasets/ncep/{}.{}.nc'.format(param, start_time[:4]))
 
 #https://psl.noaa.gov/thredds/catalog/Datasets/ncep/catalog.html?dataset=Datasets/ncep/vwnd.2023.nc
 
