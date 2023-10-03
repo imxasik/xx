@@ -1,4 +1,6 @@
 import numpy as np
+import ftplib
+import io
 import matplotlib.pyplot as plt
 
 # Generate random data for time, latitude, and the parameter of interest (e.g., temperature).
@@ -24,4 +26,21 @@ plt.ylabel('Latitude (°N)')
 plt.gca().invert_yaxis()  # Reverse the y-axis to have the North Pole at the top.
 plt.xticks(rotation=45)
 plt.tight_layout()
+
+# Save the plot to a BytesIO buffer
+plot_buffer = io.BytesIO()
+plt.savefig(plot_buffer, format="jpg", transparent=True)
+plot_buffer.seek(0)
+
+# FTP Server Details
+ftp_host = "ftpupload.net"
+ftp_username = "epiz_32144154"
+ftp_password = "Im80K123"
+
+# Connect to the FTP server and upload the plot directly
+with ftplib.FTP(ftp_host) as ftp:
+    ftp.login(ftp_username, ftp_password)
+    ftp.cwd('htdocs/wx')  # Change directory to your desired location on the FTP server
+    ftp.storbinary('STOR hov.jpg', plot_buffer)
+
 plt.show()
