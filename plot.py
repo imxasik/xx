@@ -17,8 +17,9 @@ param = 'vwnd'
 level = 250
 
 # Remote get dataset using OPeNDAP method via xarray
-ds = xr.open_dataset('http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/'
-                     'ncep.reanalysis/pressure/{}.{}.nc'.format(param, start_time[:4]))
+ds = xr.open_dataset('https://psl.noaa.gov/thredds/catalog/Datasets/ncep/catalog.html?dataset=Datasets/ncep/{}.{}.nc'.format(param, start_time[:4]))
+
+#https://psl.noaa.gov/thredds/catalog/Datasets/ncep/catalog.html?dataset=Datasets/ncep/vwnd.2023.nc
 
 # Create slice variables subset domain
 time_slice = slice(start_time, end_time)
